@@ -6,6 +6,7 @@ const config = {
     // API KEYS
     apiKey: "AIzaSyDcXLI4Q1IXXmw41NApHQLKPv7jyDh2UJU",
     authDomain: "vue-chat-app-a5f62.firebaseapp.com",
+    databaseURL: "https://vue-chat-app-a5f62-default-rtdb.firebaseio.com",
     projectId: "vue-chat-app-a5f62",
     storageBucket: "vue-chat-app-a5f62.appspot.com",
     messagingSenderId: "657715972583",

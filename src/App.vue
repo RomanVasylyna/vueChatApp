@@ -18,7 +18,9 @@
 <div class="view chat" v-else>
 
   <header>
-  <button class="logout">Logout</button>
+  <button 
+  class="logout" 
+  @click="state.username=''">Logout</button>
   <h1>Welcome, {{ state.username }}</h1>
   </header>
 
@@ -45,22 +47,22 @@
 import { reactive, onMounted, ref} from 'vue';
 
 // Importing db
-import db from './db';
+import db from './db'; 
 
 export default {
   name: 'App',
 
   setup() { 
-  // input v-model value  
-  const inputUserName = ref("");
-  const inputMessage = ref("");
+
+  const inputUserName = ref(""); // login input
+  const inputMessage = ref("");  // messages input 
   
-  const test = onMounted;
-  console.log(test)
+//   const test = onMounted;
+//   console.log(test)
   
   const state = reactive({
-  username: "",
-  messages: []
+  username: "", // Username
+  messages: []  // Empty messages array
   })
   
   // Make Sure Login is not empty
@@ -73,18 +75,18 @@ export default {
 
   const sendMessage = () => {
   //Accessing the db	  
-  const messagesRef = db.database('').ref('messages');  
+  const messagesRef = db.database().ref("message");  
   console.log(messagesRef);
   
   //Function works only if message has been typed
   if(inputMessage.value === "" || inputMessage.value === null) {
-  return
+  return;
   }
   
   //Creating a message object
   const message = {
-  username: state.username,
-  content: inputMessage.value
+  username: state.username, // Username = username input
+  content: inputMessage.value // Message itself = message input
   }
   
   //Add new object to the list of other messages
@@ -96,6 +98,24 @@ export default {
 
   }
 
+//   onMounted(() => {
+//   const messagesRef = db.database().ref('messages');  	  
+//   messagesRef.on("value", snapshot => {
+//   const data = snapshot.val();
+//   let messages = [];	 
+  
+//   Object.keys(data).forEach(key => {
+//   messages.push({
+//   id: key,
+//   username: data[key].username,
+//   content: data[key].content
+//   });	  
+//   })
+
+//   state.messages = messages;
+//   })
+//   })
+
   return {
   inputUserName,
   inputMessage,
@@ -103,6 +123,7 @@ export default {
   state,
   sendMessage
   }
+
 
 
   },
